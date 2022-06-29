@@ -1,0 +1,11 @@
+
+
+.registerDesign {
+    height: 29em;
+
+    background-color: lightgrey;
+
+    color: black;
+
+    display: flex;
+}

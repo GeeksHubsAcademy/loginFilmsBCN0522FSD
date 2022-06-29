@@ -1,0 +1,11 @@
+
+
+.homeDesign {
+    height: 26em;
+
+    background-color: beige;
+
+    color: black;
+
+    display: flex;
+}

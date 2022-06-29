@@ -1,0 +1,11 @@
+
+
+.loginDesign {
+    height: 26em;
+
+    background-color: lightcoral;
+
+    color: white;
+
+    display: flex;
+}
