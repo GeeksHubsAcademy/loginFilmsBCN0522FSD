@@ -35,6 +35,30 @@ const Login = () => {
         
         //Primero compruebo que los campos sean correctos
 
+            //Esta expresión regular ayuda a validar un email
+        if (! /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(credentials.email) ) {
+            setMsgError('Introduce un e-mail válido');
+            return;
+        }
+
+            //Esta expresión regular ayuda a validar un password (numero + letras en este caso)
+        
+        if(credentials.password.length > 4){
+
+            if (! /[\d()+-]/g.test(credentials.password) ) {
+            
+                setMsgError('Introduce un password válido');
+                return;
+            };
+            
+        }else{
+            setMsgError('El password debe de tener como mínimo 4 caracteres');
+            return;
+        }
+
+        //Por si acaso teníamos algo referenciado como error, lo limpiamos
+        setMsgError("");
+
         //Genero el body que enviaré al backend
 
         let body = {
@@ -48,7 +72,7 @@ const Login = () => {
 
             let resultado = await axios.post("https://videoclub-proyecto5.herokuapp.com/api/auth/login",body);
 
-            // console.log(resultado.data.token);
+            console.log(resultado.data.token);
 
             //Una vez recibo el token, lo decodifico
             let usuario = jwt(resultado.data.token);
