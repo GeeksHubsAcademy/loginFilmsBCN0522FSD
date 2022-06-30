@@ -2,9 +2,10 @@
 
 import React, {useState, useEffect} from 'react';
 import './Login.css';
+
 import {useNavigate} from 'react-router-dom';
-import axios from 'axios';
-import jwt from 'jwt-decode';
+import { useDispatch } from "react-redux";
+import { loginUser } from "../userSlice";
 
 const Login = () => {
 
@@ -14,6 +15,8 @@ const Login = () => {
 
     //Variables 
     let navigate = useNavigate();
+    //Dispatch va a ser un método necesario de Redux que vamos a usar
+    const dispatch = useDispatch();
 
     //Handlers
     const updateCredentials = (e) => {
@@ -31,7 +34,7 @@ const Login = () => {
     },[]);
 
     //Funciones
-    const logeame = async () => {
+    const logeame = () => {
         
         //Primero compruebo que los campos sean correctos
 
@@ -59,47 +62,21 @@ const Login = () => {
         //Por si acaso teníamos algo referenciado como error, lo limpiamos
         setMsgError("");
 
-        //Genero el body que enviaré al backend
+        //Dispatch es el método de redux que ejecuta el reducer
+        dispatch(loginUser(
+            credentials.email,
+            credentials.password
+        ));
 
-        let body = {
-            email : credentials.email,
-            password: credentials.password
-        };
-
-        //Dentro de try catch procedo a ejecutar el endpoint mediante axios
-
-        try {
-
-            let resultado = await axios.post("https://videoclub-proyecto5.herokuapp.com/api/auth/login",body);
-
-            console.log(resultado.data.token);
-
-            //Una vez recibo el token, lo decodifico
-            let usuario = jwt(resultado.data.token);
-            let token = resultado.data.token;
-
-            console.log(usuario);
-            //En caso de tener redux implementado, ahora que el backend nos ha dado el token
-            //nosotros guardaríamos ese token en redux, pero como no lo tengo, lo guardaré en localStorage
-
-            //localStorage.setItem("token", resultado.data.token);
-
-            setTimeout(()=>{
-                navigate("/");
-            },2000)
-
-
-        } catch(error){
-            setMsgError(error.response.data.message);
-        }
-        
-
+        // setTimeout(()=>{
+        //     navigate("/");
+        // },2000)
 
     };
 
      return (
          <div className='loginDesign'>
-            {/* <pre>{JSON.stringify(credentials, null,2)}</pre> */}
+            <pre>{JSON.stringify(credentials, null,2)}</pre>
             <input  type='email' name='email' title='email' onChange={updateCredentials} lenght='30'/>
             <input  type='password'  name='password' title='password' onChange={updateCredentials} lenght='30'/>
             <div className="sendButton" onClick={()=>logeame()}>Login</div>
