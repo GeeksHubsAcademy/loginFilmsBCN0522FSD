@@ -4,8 +4,8 @@ import React, {useState, useEffect} from 'react';
 import './Login.css';
 
 import {useNavigate} from 'react-router-dom';
-import { useDispatch } from "react-redux";
-import { loginUser } from "../userSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser, userData} from "../userSlice";
 
 const Login = () => {
 
@@ -17,6 +17,7 @@ const Login = () => {
     let navigate = useNavigate();
     //Dispatch va a ser un método necesario de Redux que vamos a usar
     const dispatch = useDispatch();
+    const credenciales = useSelector(userData);
 
     //Handlers
     const updateCredentials = (e) => {
@@ -27,10 +28,11 @@ const Login = () => {
     //Funciones de estado
     useEffect(()=>{
         //Comprobamos si poseemos token...
-
-        if(localStorage.getItem("token")){
+        
+        if(credenciales?.token !== ''){
             navigate("/");
         };
+        // eslint-disable-next-line 
     },[]);
 
     //Funciones
@@ -63,14 +65,13 @@ const Login = () => {
         setMsgError("");
 
         //Dispatch es el método de redux que ejecuta el reducer
-        dispatch(loginUser(
-            credentials.email,
-            credentials.password
+        dispatch(loginUser({email: credentials.email,
+            password: credentials.password}
         ));
 
-        // setTimeout(()=>{
-        //     navigate("/");
-        // },2000)
+        setTimeout(()=>{
+            navigate("/");
+        },1000)
 
     };
 

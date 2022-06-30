@@ -15,18 +15,19 @@ export const userSlice = createSlice({
           ...state,
           ...action.payload
         }
+      },
+      logout: (state, action) => {
+        return {
+          ...state.initialState
+        }
+        
       }
     },
 });
 
-export const loginUser = (email, password) => async (dispatch) => {
+export const loginUser = (body) => async (dispatch) => {
     try {
-
-      let body = {
-        email: email,
-        password: password
-      };
-
+      
       const user = await axios.post("https://videoclub-proyecto5.herokuapp.com/api/auth/login",body);
       
       let decodificada = jwt(user.data.token);
@@ -43,9 +44,13 @@ export const loginUser = (email, password) => async (dispatch) => {
     }
 };
 
+export const logOut = () => (dispatch) => {
+  dispatch(logout());
+};
 
-export const { login } = userSlice.actions;
 
-export const userSelector = (state) => state.user;
+export const { login, logout } = userSlice.actions;
+
+export const userData = (state) => state.user;
 
 export default userSlice.reducer;
