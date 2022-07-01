@@ -49,8 +49,11 @@ export const logOut = () => (dispatch) => {
 };
 
 
+//Exporto las funciones que en si realizan la accion
 export const { login, logout } = userSlice.actions;
 
+//userData contiene el estado del reducer, es decir, userData es lo que van a leer
+//los componentes conectados a este reducer, para saber sus credenciales
 export const userData = (state) => state.user;
 
 export default userSlice.reducer;

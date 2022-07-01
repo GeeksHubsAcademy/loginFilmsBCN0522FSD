@@ -10,7 +10,7 @@ import { userData, logOut } from '../../containers/User/userSlice';
 
 const Header = () => {
 
-    //Hooks
+    //Variable
     const credenciales = useSelector(userData);
 
     //Esto no es un hook, es simplemente una variable "normal"
