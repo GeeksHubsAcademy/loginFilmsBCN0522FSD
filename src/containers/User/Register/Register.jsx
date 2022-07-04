@@ -51,8 +51,6 @@ const Register = (props) => {
 
     const Registrame = async () => {
 
-        
-
         //Primero, comprobación de campos vacíos
 
         let mandatory = ['name','surname','email','password','password2','birth','payment'];

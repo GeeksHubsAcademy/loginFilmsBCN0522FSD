@@ -7,8 +7,33 @@
 
     color: black;
 
-    display: flex;
-    flex-direction: columm;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(4, auto)
+
+    
+}
+
+.cardFilm {
+    height: 20em;
+    width: 12em;
+
+    margin-bottom: 2em;
+
+    border-radius: 1em;
+
+    background-color:lightpink;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.cardFilm:hover {
+    background-color: pink;
+    transition: 0.5s;
+}
+
+.peliDesign {
+    
+    width: 7em;
 }
