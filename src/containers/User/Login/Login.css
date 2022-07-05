@@ -3,7 +3,7 @@
 .loginDesign {
     height: 26em;
 
-    background-color: lightcoral;
+    background-color: var(--pri5);
 
     color: white;
 

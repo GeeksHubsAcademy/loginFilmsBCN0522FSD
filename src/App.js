@@ -1,5 +1,7 @@
 
-import './App.css';
+
+import './Global.scss';
+import './App.scss';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 

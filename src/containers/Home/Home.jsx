@@ -6,7 +6,7 @@ import moment from 'moment';
 import { DatePicker } from 'antd';
 import { ShoppingCartOutlined }  from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import './Home.css';
+import './Home.scss';
 import { useSelector,useDispatch } from 'react-redux';
 import { searchData } from '../../components/Header/searchSlice';
 import { keepFilm } from '../../containers/FilmDetail/detailSlice';

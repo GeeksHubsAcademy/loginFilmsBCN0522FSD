@@ -79,7 +79,7 @@ const Login = () => {
      return (
          <div className='loginDesign'>
             <pre>{JSON.stringify(credentials, null,2)}</pre>
-            <input  type='email' name='email' title='email' onChange={updateCredentials} lenght='30'/>
+            <input  className="mb2" type='email' name='email' title='email' onChange={updateCredentials} lenght='30'/>
             <input  type='password'  name='password' title='password' onChange={updateCredentials} lenght='30'/>
             <div className="sendButton" onClick={()=>logeame()}>Login</div>
             <div>{msgError}</div>
