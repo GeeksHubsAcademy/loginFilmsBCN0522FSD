@@ -18,7 +18,7 @@ export const userSlice = createSlice({
       },
       logout: (state, action) => {
         return {
-          ...state.initialState
+          token : ''
         }
         
       }

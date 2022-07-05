@@ -10,6 +10,7 @@ import Home from './containers/Home/Home';
 import Login from './containers/User/Login/Login';
 import Register from './containers/User/Register/Register';
 import Profile from './containers/User/Profile/Profile';
+import FilmDetail from './containers/FilmDetail/FilmDetail';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/profile" element={<Profile/>}/>
-
+          <Route path="/detail" element={<FilmDetail/>}/>
 
         </Routes>
       

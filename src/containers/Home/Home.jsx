@@ -7,14 +7,18 @@ import { DatePicker } from 'antd';
 import { ShoppingCartOutlined }  from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import './Home.css';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { searchData } from '../../components/Header/searchSlice';
+import { keepFilm } from '../../containers/FilmDetail/detailSlice';
+import { useNavigate } from 'react-router-dom';
 
 
  
 const Home = () => {
 
     let peliculas = useSelector(searchData);
+    let navegador = useNavigate();
+    let dispatch = useDispatch();
 
     //Hook de películas por defecto al entrar en la aplicación
     const [peliculasDefecto, setPeliculasDefecto] = useState([]);
@@ -78,6 +82,19 @@ const Home = () => {
 
 
     const PeliculaEscogida = (pelicula) => {
+
+        //Primer paso, guardamos la película escogida en RDX
+
+        dispatch(keepFilm(pelicula));
+
+
+        //Segundo paso, redirigimos a FilmDetail donde veremos
+        //los detalles de la película y si estamos logeados (tenemos token),
+        //podremos alquilar la película.
+
+        setTimeout(()=>{
+            navegador("/detail");
+        },500);
 
         console.log(pelicula);
     }

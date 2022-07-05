@@ -28,6 +28,7 @@ const Login = () => {
     //Funciones de estado
     useEffect(()=>{
         //Comprobamos si poseemos token...
+        console.log("soy credenciales",credenciales);
         
         if(credenciales?.token !== ''){
             navigate("/");
