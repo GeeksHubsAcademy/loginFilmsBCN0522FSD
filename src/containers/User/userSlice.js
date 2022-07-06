@@ -21,8 +21,15 @@ export const userSlice = createSlice({
           token : ''
         }
         
+      },
+      update: (state, action) => {
+        return {
+          ...state,
+          ...action.payload
+        }
       }
     },
+    
 });
 
 export const loginUser = (body) => async (dispatch) => {
@@ -48,9 +55,46 @@ export const logOut = () => (dispatch) => {
   dispatch(logout());
 };
 
+export const updateUser = (datosUsuario,perfilUsuario) => async (dispatch) => {
+        
+  try {
+
+      let body = {
+        name: perfilUsuario.user_name,
+        email: perfilUsuario.user_email,
+        password: perfilUsuario.user_password
+      }
+
+      console.log("soy el maldito body", body);
+
+      let config = {
+          headers: { Authorization: `Bearer ${datosUsuario.token}` }
+      };
+
+      let resultado = await axios.put(`https://buscadordepeliculas.herokuapp.com/api/users/${datosUsuario.user_id}`,body, config);
+
+      //Después de cambiar en la database los datos de usuario, cambiamos esos datos
+      //en redux.
+
+      if(resultado.status === 200) {
+        console.log("entra aqui");
+        //Hacemos un update local de las credenciales del usuario
+         dispatch(update({perfilUsuario}));
+      }
+
+      // console.log("soy resultado", resultado);
+
+
+      
+  } catch (error) {
+
+      console.log(error);
+  }
+}
+
 
 //Exporto las funciones que en si realizan la accion
-export const { login, logout } = userSlice.actions;
+export const { login, logout, update } = userSlice.actions;
 
 //userData contiene el estado del reducer, es decir, userData es lo que van a leer
 //los componentes conectados a este reducer, para saber sus credenciales
