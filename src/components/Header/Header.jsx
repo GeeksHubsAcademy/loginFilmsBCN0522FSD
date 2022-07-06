@@ -51,7 +51,7 @@ const Header = () => {
 
         return (
             <div className='headerDesign'>
-                <div className='textLink' onClick={()=>viajar("/profile")}>{credenciales?.user_role}</div>
+                <div className='textLink' onClick={()=>viajar("/profile")}>{credenciales?.user_name}</div>
                 <div className='textLink' onClick={()=>dispatch(logOut())}>log out</div>
             </div>
         )
